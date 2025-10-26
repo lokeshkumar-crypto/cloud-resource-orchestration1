@@ -5,16 +5,13 @@ on:
 jobs:
   run-python:
     runs-on: ubuntu-latest
-
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
-
     - name: Set up Python 3.8
       uses: actions/setup-python@v4
       with:
         python-version: '3.8'
-
     - name: Install dependencies
       run: |
         if [ -f requirements.txt ]; then
@@ -22,9 +19,13 @@ jobs:
         else
           echo "No requirements.txt found, skipping dependencies installation"
         fi
-
     - name: Run Python script
       run: |
         echo "Running main.py with input..."
-        python main.py input.txt
+        python main.py input.txt > output.txt
         echo "Script completed successfully!"
+    - name: Upload output artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: workflow-output
+        path: output.txt
