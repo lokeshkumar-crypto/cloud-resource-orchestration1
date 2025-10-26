@@ -25,7 +25,7 @@ jobs:
         python main.py input.txt > output.txt
         echo "Script completed successfully!"
     - name: Upload output artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: workflow-output
         path: output.txt
